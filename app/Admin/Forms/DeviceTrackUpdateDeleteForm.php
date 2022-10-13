@@ -23,7 +23,7 @@ class DeviceTrackUpdateDeleteForm extends Form implements LazyRenderable
     {
         // 获取设备id
         $id = $this->payload['id'] ?? null;
-
+        $is_device = $this->payload['is_device'] ?? false;
         // 获取用户id，来自表单传参
         $return_time = $input['return_time'] ?? null;
         $return_description = $input['return_description'] ?? null;
@@ -35,7 +35,12 @@ class DeviceTrackUpdateDeleteForm extends Form implements LazyRenderable
         }
 
         // 设备追踪
-        $device_track = DeviceTrack::where('id', $id)->first();
+        if ($is_device){
+            $device_track = DeviceTrack::where('device_id', $id)->first();
+        }else{
+            $device_track = DeviceTrack::where('id', $id)->first();
+        }
+
 
         $device_track->return_time = $return_time;
         $device_track->return_description = $return_description;

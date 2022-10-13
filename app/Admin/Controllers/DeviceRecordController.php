@@ -347,7 +347,7 @@ class DeviceRecordController extends AdminController
                     // 归还设备
                     // @permissions
                     if (Admin::user()->can('device.track.update_delete') && $is_lend) {
-                        $actions->append(new DeviceTrackUpdateDeleteAction());
+                        $actions->append(new DeviceTrackUpdateDeleteAction(true));
                     }
 
                     // 撤销报废
@@ -436,15 +436,16 @@ class DeviceRecordController extends AdminController
                     $query->whereNotNUll('lend_time');
                 });
                 $filter->scope('using', trans('main.using'))->has('admin_user');
-                $filter->scope('dead', trans('main.dead'))->doesntHave('admin_user')->where('expired', '<', now());
+                $filter->scope('dead', trans('main.dead'))->doesntHave('admin_user')->where('expired', '<', now())->whereNull('discard_at');
                 $filter->scope('idle', trans('main.idle'))
                     ->doesntHave('admin_user')
-                    ->whereNull('expired');
+                    ->whereNull('discard_at');
+
                 $filter->equal('category_id')->select(DeviceCategory::pluck('name', 'id'));
                 $filter->equal('vendor_id')->select(VendorRecord::pluck('name', 'id'));
                 $filter->equal('admin_user.name')->select(Support::selectUsers('name'));
                 $filter->equal('admin_user.department_id')->select(Department::pluck('name', 'id'));
-                $filter->equal('depreciation_id')->select(DepreciationRule::pluck('name', 'id'));
+                $filter->equal('depreciation_rule_id')->select(DepreciationRule::pluck('name', 'id'));
                 $filter->date('purchased');
                 $filter->date('expired');
                 /**
