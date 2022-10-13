@@ -54,6 +54,9 @@ class DeviceTrackController extends AdminController
             $grid->column('user.name');
             $grid->column('lend_time');
             $grid->column('lend_description');
+            $grid->column('plan_return_time');
+            $grid->column('return_time');
+            $grid->column('return_description');
             $grid->column('created_at');
 
             /**
@@ -68,7 +71,7 @@ class DeviceTrackController extends AdminController
                 } else {
                     // @permissions
                     if (Admin::user()->can('device.track.update_delete') && $this->deleted_at == null) {
-                        $actions->append(new DeviceTrackUpdateDeleteAction());
+                        $actions->append(new DeviceTrackUpdateDeleteAction(false));
                     }
                 }
             });

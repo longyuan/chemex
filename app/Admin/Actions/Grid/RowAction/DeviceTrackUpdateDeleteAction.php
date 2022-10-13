@@ -8,10 +8,12 @@ use Dcat\Admin\Widgets\Modal;
 
 class DeviceTrackUpdateDeleteAction extends RowAction
 {
-    public function __construct()
+    protected $is_device;
+    public function __construct($is_device)
     {
         parent::__construct();
         $this->title = '<i class="fa fa-fw feather icon-download"></i> ' . admin_trans_label('Update Delete');
+        $this->is_device = $is_device;
     }
 
     /**
@@ -23,6 +25,7 @@ class DeviceTrackUpdateDeleteAction extends RowAction
     {
         $form = DeviceTrackUpdateDeleteForm::make()->payload([
             'id' => $this->getKey(),
+            'is_device' =>$this->is_device
         ]);
 
         return Modal::make()
