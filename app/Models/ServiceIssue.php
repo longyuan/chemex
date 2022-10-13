@@ -33,4 +33,14 @@ class ServiceIssue extends Model
     {
         return $this->hasOne(ServiceRecord::class, 'id', 'service_id');
     }
+
+    /**
+     * 负责人.
+     *
+     * @return HasOne
+     */
+    public function checker(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'checker');
+    }
 }

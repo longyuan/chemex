@@ -17,6 +17,10 @@ return [
         'status' => '状态',
         'start' => '开始时间',
         'end' => '结束时间',
+        'description' => '描述',
+        'checker' => [
+            'name' => '操作人',
+        ],
     ],
     'options' => [
     ],
