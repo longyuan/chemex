@@ -47,7 +47,7 @@ class ServiceIssueController extends AdminController
      */
     protected function grid(): Grid
     {
-        return Grid::make(new ServiceIssue(['service']), function (Grid $grid) {
+        return Grid::make(new ServiceIssue(['service','checker']), function (Grid $grid) {
             $grid->model()->orderBy('status', 'ASC');
 
             $grid->column('id');
@@ -56,7 +56,8 @@ class ServiceIssueController extends AdminController
             $grid->column('status')->using(Data::serviceIssueStatus());
             $grid->column('start');
             $grid->column('end');
-
+            $grid->column('description');
+            $grid->column('checker.name');
             /**
              * 行操作按钮.
              */

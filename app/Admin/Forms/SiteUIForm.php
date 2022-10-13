@@ -42,6 +42,8 @@ class SiteUIForm extends Form
         $this->switch('grid_row_actions_right')
             ->help(admin_trans_label('Gird Row Action Right Help'))
             ->default(admin_setting('grid_row_actions_right'));
+        $this->switch('switch_to_select_create')
+            ->default(admin_setting('switch_to_select_create'));
         $this->switch('switch_to_filter_panel')
             ->default(admin_setting('switch_to_filter_panel'));
     }

@@ -3,7 +3,9 @@
 namespace App\Support;
 
 
+use App\Admin\Extensions\Form\SelectCreate;
 use Dcat\Admin\Admin;
+use Dcat\Admin\Form;
 use Illuminate\Support\Facades\Storage;
 
 class Site
@@ -109,7 +111,7 @@ class Site
      */
     public function injectFields()
     {
-//        Form::extend('selectCreate', SelectCreate::class);
+        Form::extend('selectCreate', SelectCreate::class);
     }
 
     /**
