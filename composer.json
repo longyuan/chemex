@@ -39,6 +39,8 @@
     },
     "require-dev": {
         "spatie/laravel-ignition": "^2.0",
+        "barryvdh/laravel-debugbar": "^3.7",
+        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",

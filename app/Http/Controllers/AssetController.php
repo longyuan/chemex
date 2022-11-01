@@ -26,13 +26,13 @@ class AssetController extends Controller
             $device_records = DeviceRecord::where('asset_number', '!=', null)->get()->toArray();
             $part_records = PartRecord::where('asset_number', '!=', null)->get()->toArray();
             $software_records = SoftwareRecord::where('asset_number', '!=', null)->get()->toArray();
-            foreach ($device_records as $device_record) {
+            foreach ($device_records as &$device_record) {
                 $device_record['asset_type'] = 'device';
             }
-            foreach ($part_records as $part_record) {
+            foreach ($part_records as &$part_record) {
                 $part_record['asset_type'] = 'part';
             }
-            foreach ($software_records as $software_record) {
+            foreach ($software_records as &$software_record) {
                 $software_record['asset_type'] = 'software';
             }
             $records = array_merge($device_records, $part_records, $software_records);
