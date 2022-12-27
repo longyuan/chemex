@@ -72,7 +72,7 @@ class DefectTrend extends Line
         }
 
         // 图表数据
-        $this->withContent();
+        $this->withContent($year_all);
         $this->withChart($data);
     }
 
@@ -81,12 +81,12 @@ class DefectTrend extends Line
      *
      * @return DefectTrend
      */
-    public function withContent(): DefectTrend
+    public function withContent($content): DefectTrend
     {
         return $this->content(
-            <<<'HTML'
+            <<<HTML
 <div class="d-flex justify-content-between align-items-center mt-1" style="margin-bottom: 2px">
-    <h4 class="ml-1"></h4>
+    <h4 class="ml-1">{$content}</h4>
 </div>
 HTML
         );

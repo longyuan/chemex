@@ -18,10 +18,10 @@ class SiteSettingController extends Controller
             ->description(admin_trans_label('description'))
             ->body(function (Row $row) {
                 $tab = new Tab();
-                $tab->add(trans('main.site_setting'), new SiteSettingForm(), true);
-                $tab->addLink(trans('main.site_ui'), admin_route('site.ui.index'));
-                $tab->addLink(trans('main.site_ldap'), admin_route('site.ldap.index'));
-                $tab->addLink(trans('main.site_version'), admin_route('site.version.index'));
+                $tab->add(admin_trans('main.site_setting'), new SiteSettingForm(), true);
+                $tab->addLink(admin_trans('main.site_ui'), admin_route('site.ui.index'));
+                $tab->addLink(admin_trans('main.site_ldap'), admin_route('site.ldap.index'));
+                $tab->addLink(admin_trans('main.site_version'), admin_route('site.version.index'));
                 $row->column(12, $tab->withCard());
             });
     }

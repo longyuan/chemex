@@ -2,11 +2,11 @@
 <head lang="zh">
     <title>设备打印详细单</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="{{asset("static/js/print/bootstarp.css")}}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset("static/css/bootstrap.css")}}" crossorigin="anonymous">
 </head>
 <body>
 
-<script src="/static/js/print/jquery-qrcode.min.js"></script>
+<script src="{{asset("static/js/print/jquery-qrcode.min.js")}}"></script>
 
 <div class="print">
     <style>
@@ -41,7 +41,7 @@
         <div class="card ">
             <table class="table table-bordered">
                 {{--                已审核标签，默认不显示--}}
-                {{--                <i class="postImg"><img src="/static/js/print/images/stamp_0003.png"/></i>--}}
+{{--                                <i class="postImg"><img src="/static/js/print/images/stamp_0003.png"/></i>--}}
 
                 <caption class="text-center"><h3>设备标签单</h3></caption>
                 <thead>
