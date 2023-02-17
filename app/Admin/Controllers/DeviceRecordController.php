@@ -276,7 +276,7 @@ class DeviceRecordController extends AdminController
             $grid->column('depreciation.name', '', $sort_columns);
             $grid->column('created_at', '', $sort_columns);
             $grid->column('updated_at', '', $sort_columns);
-
+            $grid->column('discard_at', '', $sort_columns);
             /**
              * 自定义字段.
              */
