@@ -48,6 +48,7 @@ return [
         'custom_column_id' => '自定义字段',
         'select_options' => '选项列表',
         'item' => '项',
+        'discard_at' => '报废时间',
     ],
     'options' => [
     ],
