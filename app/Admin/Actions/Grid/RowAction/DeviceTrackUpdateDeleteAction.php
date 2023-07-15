@@ -9,7 +9,7 @@ use Dcat\Admin\Widgets\Modal;
 class DeviceTrackUpdateDeleteAction extends RowAction
 {
     protected $is_device;
-    public function __construct($is_device)
+    public function __construct($is_device = true)
     {
         parent::__construct();
         $this->title = '<i class="fa fa-fw feather icon-download"></i> ' . admin_trans_label('Update Delete');
