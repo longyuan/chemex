@@ -1,9 +1,0 @@
-version: "3"
-
-services:
-  chemex:
-    image: celaraze/chemex:latest
-    container_name: chemex
-    build: .
-    ports:
-      - "8000:8000"
