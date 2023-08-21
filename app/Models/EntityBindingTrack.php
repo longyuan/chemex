@@ -12,7 +12,7 @@ class EntityBindingTrack extends Model
     use HasFactory, SoftDeletes;
 
     /**
-     * 一对一，用户管理记录有一个用户.
+     * 一对一，实体绑定记录属于一个实体.
      *
      * @return BelongsTo
      */
@@ -21,6 +21,11 @@ class EntityBindingTrack extends Model
         return $this->belongsTo(Entity::class, 'child_entity_id', 'id');
     }
 
+    /**
+     * 一对一，作为子实体的实体绑定记录属于一个实体.
+     *
+     * @return BelongsTo
+     */
     public function entityAsChild(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'entity_id', 'id');

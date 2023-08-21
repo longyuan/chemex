@@ -2,10 +2,8 @@
 
 namespace App\Filament\Resources\EntityResource\RelationManagers;
 
-use App\Models\Entity;
+use App\Filament\Actions\EntityAction;
 use App\Models\EntityBindingTrack;
-use App\Utils\NotificationUtil;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -39,42 +37,27 @@ class BindingTracksAsChildRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\Action::make('绑定至父实体')
-                    ->form([
-                        Select::make('entity')
-                            ->options(Entity::query()
-                                ->doesntHave('bindingTracksAsChild')
-                                ->pluck('name', 'id'))
-                            ->label('实体')
-                            ->required(),
-                    ])
-            ])
-            ->actions([
-//                Tables\Actions\EditAction::make(),
-//                Tables\Actions\ViewAction::make(),
-                Tables\Actions\Action::make('解除绑定')
-                    ->action(function (EntityBindingTrack $entityBindingTrack) {
-                        if ($entityBindingTrack->delete()) {
-                            NotificationUtil::make(true, '已解除子实体绑定');
-                        } else {
-                            NotificationUtil::make(false, '解除失败');
-                        }
-                    })
+                // 绑定至父实体
+                EntityAction::createBindingTrackAsChild($this->getOwnerRecord()->getKey())
                     ->visible(function (EntityBindingTrack $entityBindingTrack) {
                         return $entityBindingTrack->getAttribute('deleted_at') == null;
-                    })
+                    }),
+                // 解除绑定至父实体
+                EntityAction::deleteBindingTrackAsChild($this->getOwnerRecord()->getKey())
+                    ->visible(function (EntityBindingTrack $entityBindingTrack) {
+                        return !$entityBindingTrack->getAttribute('deleted_at') == null;
+                    }),
+            ])
+            ->actions([
+
             ])
             ->bulkActions([
-//                Tables\Actions\BulkActionGroup::make([
-//                    Tables\Actions\DeleteBulkAction::make(),
-//                ]),
+
             ])
             ->emptyStateActions([
-//                Tables\Actions\CreateAction::make(),
+//
             ])
             ->modifyQueryUsing(function (Builder $query) {
-//                dd($query->get());
-//                dd($this->getOwnerRecord()->bindingTracksAsChild);
                 return $query
                     ->where('entity_id', '!=', $this->getOwnerRecord()->getKey())
                     ->orderByDesc('id')

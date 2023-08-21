@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\EntityResource\RelationManagers;
 
 use App\Filament\Actions\EntityAction;
+use App\Models\EntityBindingTrack;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -36,12 +37,15 @@ class BindingTracksRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                EntityAction::createBindingTrack($this->getOwnerRecord()),
+                EntityAction::createBindingTrack($this->getOwnerRecord()->getKey()),
             ])
             ->actions([
 //                Tables\Actions\EditAction::make(),
 //                Tables\Actions\ViewAction::make(),
                 EntityAction::deleteBindingTrack()
+                    ->visible(function (EntityBindingTrack $entityBindingTrack) {
+                        return $entityBindingTrack->getAttribute('deleted_at') == null;
+                    })
             ])
             ->bulkActions([
 //                Tables\Actions\BulkActionGroup::make([

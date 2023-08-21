@@ -74,7 +74,6 @@ class EntityResource extends Resource
                         ->visible(function (Entity $entity) {
                             return $entity->userTracks()->count();
                         }),
-                    EntityAction::createBindingTrack()
                 ]),
             ])
             ->bulkActions([
