@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\EntityResource\Pages;
 
 use App\Filament\Resources\EntityResource;
+use App\Models\Entity;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\Page;
 
 class CreateEntity extends CreateRecord
 {

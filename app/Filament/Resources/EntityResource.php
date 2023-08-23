@@ -7,6 +7,7 @@ use App\Filament\Resources\EntityResource\Pages;
 use App\Filament\Resources\EntityResource\RelationManagers;
 use App\Models\Entity;
 use App\Models\EntityCategory;
+use Exception;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,10 +18,17 @@ class EntityResource extends Resource
 {
     protected static ?string $model = Entity::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     protected static ?string $modelLabel = '实体';
 
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationGroup = '主数据';
+
+    /**
+     * @throws Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -59,7 +67,10 @@ class EntityResource extends Resource
                     ->label('子实体'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->multiple()
+                    ->options(EntityCategory::query()->pluck('name', 'id'))
+                    ->label('分类'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -107,8 +118,6 @@ class EntityResource extends Resource
                 Forms\Components\TextInput::make('specification')
                     ->maxLength(255)
                     ->label('规格'),
-                Forms\Components\DatePicker::make('warranty_date')
-                    ->label('保修日期'),
             ]);
     }
 

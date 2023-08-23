@@ -2,35 +2,32 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EntityCategoryResource\Pages;
-use App\Filament\Resources\EntityCategoryResource\RelationManagers;
-use App\Models\EntityCategory;
-use Filament\Forms;
+use App\Filament\Resources\EntityUserTrackTypeResource\Pages;
+use App\Filament\Resources\EntityUserTrackTypeResource\RelationManagers;
+use App\Models\EntityUserTrackType;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class EntityCategoryResource extends Resource
+class EntityUserTrackTypeResource extends Resource
 {
-    protected static ?string $model = EntityCategory::class;
+    protected static ?string $model = EntityUserTrackType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $modelLabel = '实体分类';
+    protected static ?string $modelLabel = '实体分配方式';
 
-    protected static ?int $navigationSort = 1;
-
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationGroup = '元数据配置';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('名称')
-                    ->maxLength(255)
-                    ->required(),
+                //
             ]);
     }
 
@@ -38,11 +35,10 @@ class EntityCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('名称')
+                //
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -50,6 +46,8 @@ class EntityCategoryResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
@@ -67,9 +65,17 @@ class EntityCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEntityCategories::route('/'),
-            'create' => Pages\CreateEntityCategory::route('/create'),
-            'edit' => Pages\EditEntityCategory::route('/{record}/edit'),
+            'index' => Pages\ListEntityUserTrackTypes::route('/'),
+            'create' => Pages\CreateEntityUserTrackType::route('/create'),
+            'edit' => Pages\EditEntityUserTrackType::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }

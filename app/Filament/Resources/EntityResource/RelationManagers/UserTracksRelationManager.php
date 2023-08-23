@@ -31,7 +31,7 @@ class UserTracksRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->recordTitleAttribute('user.name')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->badge()
@@ -42,6 +42,7 @@ class UserTracksRelationManager extends RelationManager
                             return 'success';
                         }
                     })
+                    ->searchable()
                     ->label('管理者'),
                 Tables\Columns\TextColumn::make('comment')
                     ->label('分配说明'),
@@ -70,20 +71,13 @@ class UserTracksRelationManager extends RelationManager
                     }),
             ])
             ->actions([
-//                Tables\Actions\EditAction::make(),
-//                Tables\Actions\DeleteAction::make(),
-//                Tables\Actions\ForceDeleteAction::make(),
-//                Tables\Actions\RestoreAction::make(),
+
             ])
             ->bulkActions([
-//                Tables\Actions\BulkActionGroup::make([
-//                    Tables\Actions\DeleteBulkAction::make(),
-//                    Tables\Actions\RestoreBulkAction::make(),
-//                    Tables\Actions\ForceDeleteBulkAction::make(),
-//                ]),
+
             ])
             ->emptyStateActions([
-//                Tables\Actions\CreateAction::make(),
+
             ])
             ->modifyQueryUsing(fn(Builder $query) => $query->orderByDesc('id')
                 ->withoutGlobalScopes([

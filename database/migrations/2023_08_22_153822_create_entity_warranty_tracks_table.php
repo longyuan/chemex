@@ -10,14 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('entity_user_tracks', function (Blueprint $table) {
-            $table->comment('实体分配管理者表。');
+        Schema::create('entity_warranty_tracks', function (Blueprint $table) {
+            $table->comment('实体维保记录表');
             $table->id();
             $table->integer('entity_id')->comment('实体ID');
-            $table->integer('user_id')->comment('用户ID');
-            $table->string('comment')->nullable()->comment('分配原因');
-            $table->string('delete_comment')->nullable()->comment('解除原因');
-            $table->timestamp('expire_datetime')->nullable()->comment('到期时间');
+            $table->integer('vendor_id')->comment('厂商ID');
+            $table->integer('vendor_contact_id')->comment('厂商联系人ID');
+            $table->timestamp('expire_date')->comment('过期日期');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('entity_user_tracks');
+        Schema::dropIfExists('entity_warranty_tracks');
     }
 };

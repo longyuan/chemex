@@ -27,9 +27,9 @@ return new class extends Migration {
             $table->string('specification')
                 ->nullable()
                 ->comment('规格');
-            $table->timestamp('warranty_date')
-                ->nullable()
-                ->comment('保修期');
+            $table->boolean('virtual')
+                ->default(false)
+                ->comment('虚拟实体标签');
             $table->softDeletes();
             $table->timestamps();
         });

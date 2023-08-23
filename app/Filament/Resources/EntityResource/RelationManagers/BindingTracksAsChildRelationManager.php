@@ -22,7 +22,7 @@ class BindingTracksAsChildRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->recordTitleAttribute('entityAsChild.asset_number')
             ->columns([
                 Tables\Columns\TextColumn::make('entityAsChild.asset_number')
                     ->label('资产编号'),
