@@ -1,9 +1,0 @@
-version: "3"
-
-services:
-    chemex:
-        image: kenou/vapp-template:latest
-        container_name: kenou-vapp-template
-        build: .
-        ports:
-            - "6901:6901"
