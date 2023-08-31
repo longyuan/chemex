@@ -35,7 +35,27 @@ class DevicePrintController extends Controller
                 switch($content['PrintType'])
                 {
                     case'A4_Print':
-                        return $this->make_device_tagA4pdf($data,$content['A4_Format']);
+                        $width = $content['width'];
+                        $height = $content['height'];
+                        switch($content['A4_Format'])
+                        {
+                            case '90x70':
+                                $width = 90;
+                                $height = 70;
+                                break;
+
+                            case '60x40':
+                                $width = 60;
+                                $height = 40;
+                                break;
+
+                            default:
+                                $width = $content['width'];
+                                $height = $content['height'];
+                                break;
+                        }
+
+                        return $this->make_device_tagA4pdf($data,$width,$height);
                         break;
                     case'Tag_Print':
                         $width = $content['width'];
@@ -68,11 +88,11 @@ class DevicePrintController extends Controller
      * 生成A4打印机PDF.
      * @param mixed $layout 标签排版：60x40,90x70
      */
-    public function make_device_tagA4pdf($data,$layout){
+    public function make_device_tagA4pdf($data,$width,$height){
         $html2pdf = new HTML2PDF('P', 'A4', 'cn', true, 'utf-8', array(0, 0, 0, 0));
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->setDefaultFont('stsongstdlight');
-        $html2pdf->writeHTML(view('print_tag', ['item' => 'device', 'data' => $data]), false);
+        $html2pdf->writeHTML(view('print_tag', ['item' => 'device','width' => $width,'height' => $height, 'data' => $data]), false);
         $html2pdf->output('qrcode.pdf');
     }
 

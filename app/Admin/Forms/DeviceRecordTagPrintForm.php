@@ -62,6 +62,10 @@ class DeviceRecordTagPrintForm extends Form implements LazyRenderable
         ->when('A4_Print',function(form $form){
 
             $form->radio('A4_Format','A4模板')
+                ->when('Custom',function(form $form){
+                    $form->text('width','宽度');
+                    $form->text('height','高度');
+                })
                  ->options([
                     '90x70' => '每页8张，每张 90x70 MM',
                     '60x40' => '每页21张，每张 60x40 MM',
