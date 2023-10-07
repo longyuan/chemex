@@ -111,6 +111,7 @@ return [
         'device_status' => '设备状态',
         'no_user' => '闲置',
         'discard_at' => '报废时间',
+        'deleted_description' => '解除归属原因'
     ],
     'options' => [
     ],
