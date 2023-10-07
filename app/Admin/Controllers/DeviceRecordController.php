@@ -199,7 +199,7 @@ class DeviceRecordController extends AdminController
     public function sortColumns(): array
     {
         return ColumnSort::where('table_name', (new DeviceRecord())->getTable())
-            ->get(['name', 'order'])
+            ->orderBy('order','asc')->get(['name', 'order'])
             ->toArray();
     }
 
