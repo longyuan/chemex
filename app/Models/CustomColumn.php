@@ -42,6 +42,6 @@ class CustomColumn extends Model
      */
     public function setSelectOptionsAttribute($select_options)
     {
-        $this->attributes['select_options'] = json_encode(array_values($select_options));
+        $this->attributes['select_options'] = json_encode(array_values($select_options), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 }
