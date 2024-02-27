@@ -39,8 +39,9 @@ class ConsumableRecordOutForm extends Form
                     return $this->response()
                         ->error(trans('main.shortage_in_number'));
                 }
-                $new_consumable_track = $consumable_track->replicate();
-                $new_consumable_track->number -= $number;
+                $new_consumable_track = new ConsumableTrack();
+                $new_consumable_track->consumable_id = $consumable_record_id;
+                $new_consumable_track->number = $consumable_track->number-$number;
                 $new_consumable_track->change = $number;
                 $new_consumable_track->user_id = $user_id;
                 $new_consumable_track->description = $description;
