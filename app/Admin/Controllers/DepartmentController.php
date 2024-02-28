@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Tree\RowAction\DepartmentCreateAction;
 use App\Admin\Actions\Tree\ToolAction\DepartmentImportAction;
 use App\Admin\Repositories\Department;
 use App\Form;
@@ -115,6 +116,7 @@ class DepartmentController extends AdminController
             if (!Admin::user()->can('department.delete')) {
                 $tree->disableDeleteButton();
             }
+            $tree->actions(new DepartmentCreateAction('ff','fff'));
             $tree->disableCreateButton();
         });
     }
